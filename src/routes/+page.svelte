@@ -33,15 +33,13 @@
 </svelte:head>
 
 <section>
-	<h1>
+  <!--
 		<span class="banner">
 			<picture>
 				<img src={banner} alt="Welcome" />
 			</picture>
 		</span>
-		To start, add items to the decision array:
-	</h1>
-
+      -->
 	<ChoiceSelector />
 </section>
 
@@ -51,7 +49,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		flex: 0.6;
+		flex: 0.5;
 	}
 
 	h1 {

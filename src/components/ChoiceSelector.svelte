@@ -34,14 +34,17 @@
 <style>
   .container {
     width: 100%;
+    overflow: scroll;
     display: flex;
-    align-items: center;
+    align-items: flex-top;
   }
-  .input-container {
+  .inner-container {
     display: flex;
+    padding: 16px;
     flex-direction: column;
     align-items: center;
     width: 50%;
+    height: 100%;
     gap: 8px;
   }
 
@@ -57,23 +60,34 @@
     height: 3em;
   }
 
+  .hidden {
+    display: none
+  }
+
   .items-list {
     margin-top: 1rem;
   }
 </style>
 
+<h1>To start, add items to the decision array:</h1>
 <div class="container">
-  <div class="input-container">
+  <div class="inner-container">
     <textarea bind:value={inputText} rows="3" placeholder={placeholder}></textarea>
     <button on:click={addItem} disabled={items.length >= 20 || inputText.trim() === ''}>Add</button>
     {#if items.length >= 20}
       <p class="error">You cannot add more than 20 items.</p>
     {/if}
   </div>
-  <ul class="items-list">
-    {#each items as item, index (index)}
-      <li>{item}</li>
-    {/each}
-  </ul>
+  <div class="inner-container" class:hidden={items.length < 1}>
+      <h3>Available Options</h3>
+      <ul class="items-list">
+        {#each items as item, index (index)}
+          <li>{item}</li>
+        {/each}
+      </ul>
+      <button class:hidden={items.length < 2}>
+        Start Race
+      </button>
   </div>
+</div>
 
