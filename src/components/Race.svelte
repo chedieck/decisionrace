@@ -1,0 +1,166 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  type Option = {
+    id: number;
+    name: string;
+    votes: number;
+  };
+
+  function getTitle(name: string, votes: number): string {
+    return `${name} (${votes}/${VOTES_TO_WIN})`;
+  }
+
+  let minWidth = 20; // Default minWidth
+  let finished = false;
+  export let optionNames: string[] = [];
+  let options: Option[] = [];
+  const VOTES_TO_WIN: number = 20;
+
+  onMount(() => {
+    options = optionNames.map((option, index) => ({ id: index, name: option, votes: 0 }));
+    updateMinWidth();
+  });
+
+  function updateMinWidth(): void {
+    minWidth = Math.max(
+      ...options.map(option => getTitle(option.name, VOTES_TO_WIN).length),
+      minWidth
+    );
+    // Convert to a more manageable unit if necessary, e.g., assuming each character takes roughly 0.6ch space
+    minWidth *= 1;
+  }
+
+  function raceStep(): void {
+    if (finished) return;
+    const selected: number = Math.floor(Math.random() * options.length);
+    options[selected].votes = Math.min(options[selected].votes + 1, VOTES_TO_WIN); // Prevent exceeding VOTES_TO_WIN
+    if (options[selected].votes >= VOTES_TO_WIN) {
+      titleMessage = `🏆 ${options[selected].name} won the race! 🏆`;
+      finished = true
+    }
+  }
+
+  let titleMessage = 'The race has started!';
+  function handleKeydown(event: KeyboardEvent) {
+    if (event.key === ' ' || event.key === 'Enter') {
+      raceStep();
+    }
+  }
+
+  onMount(() => {
+    window.addEventListener('keydown', handleKeydown);
+    return () => {
+      window.removeEventListener('keydown', handleKeydown);
+    };
+  });
+</script>
+
+<style>
+  .track {
+    display: flex;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    position: relative;
+    min-height: 1em;
+    font-size: 48px;
+  }
+
+  .option-title {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    transition: width 0.5s ease;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .name {
+    background-color: var(--color-theme-2);
+    font-size: 24px;
+    align-content: center;
+  }
+
+  .progress-bar {
+    height: 100%;
+    transition: width 0.5s ease;
+    text-align: center;
+  }
+  .horse {
+    z-index: 100;
+  }
+
+  .horse-won {
+    transform: translateX(100%); /* Move horse outside the progress bar when it reaches 100% */
+  }
+
+  .finish-line {
+    height: 100%;
+    padding-right: 30px;
+    border-left: 2px solid #000;
+  }
+  .title {
+    width: 100%;
+    min-height: 3em;
+    min-width: 100%;
+  }
+
+  .score {
+    font-size: 48px;
+    font-weight: bold;
+  }
+
+  .item-container {
+    padding: 20px;
+  }
+
+  .item-container:nth-child(odd) {
+    background-color: var(--color-bg-2);
+  }
+
+  .progress-container {
+    width: 90%;
+    position: relative;
+    display: flex;
+    overflow: visible;
+  }
+
+  .race-container {
+    width: 100%;
+  }
+
+  .item-container:nth-child(even) {
+    background-color: var(--color-bg-1);
+  }
+</style>
+
+<div class="race-container">
+  <h1 class="title">{titleMessage}</h1>
+  <div>
+    {#each options as { id, name, votes }}
+      <div class="item-container">
+        <div class="option-title">
+          <div class="score">{votes.toString().padStart(2, '0')}/{VOTES_TO_WIN}</div>
+
+          <div class="name">{name}</div>
+          <div></div>
+        </div>
+        <div class="track" style="width: 100%;">
+          <div class="progress-container">
+            <div class="progress-bar" style={`width: ${(votes / VOTES_TO_WIN) * 100}%`}>
+            </div>
+            <div class={`horse ${votes === VOTES_TO_WIN ? 'horse-won' : ''}`}>🐎</div>
+          </div>
+          <div class="finish-line">🏁</div>
+        </div>
+      </div>
+    {/each}
+  </div>
+</div>
+
+{#if !finished}
+  <button on:click={raceStep}>Next Step</button>
+{/if}
+

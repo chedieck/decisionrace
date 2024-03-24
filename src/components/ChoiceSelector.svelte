@@ -1,7 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Race from './Race.svelte'
+  import { browser } from '$app/environment';
   let inputText: string = '';
   let items: string[] = [];
+
+  export let raceStarted: boolean
 
   const placeholder = 'Option 1\nOption 2\n...'
 
@@ -69,10 +73,11 @@
   }
 </style>
 
+{#if !raceStarted}
 <h1>To start, add items to the decision array:</h1>
 <div class="container">
   <div class="inner-container">
-    <textarea bind:value={inputText} rows="3" placeholder={placeholder}></textarea>
+    <textarea disabled={!browser} bind:value={inputText} rows="3" placeholder={placeholder}></textarea>
     <button on:click={addItem} disabled={items.length >= 20 || inputText.trim() === ''}>Add</button>
     {#if items.length >= 20}
       <p class="error">You cannot add more than 20 items.</p>
@@ -85,9 +90,12 @@
           <li>{item}</li>
         {/each}
       </ul>
-      <button class:hidden={items.length < 2}>
+      <button on:click={() => raceStarted = true} class:hidden={items.length < 2}>
         Start Race
       </button>
   </div>
 </div>
-
+{/if}
+{#if raceStarted}
+  <Race optionNames={items}/>
+{/if}

@@ -40,7 +40,7 @@
 			</picture>
 		</span>
       -->
-	<ChoiceSelector />
+	<ChoiceSelector/>
 </section>
 
 <style>
