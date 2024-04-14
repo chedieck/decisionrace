@@ -32,7 +32,7 @@
 
 </svelte:head>
 
-<section>
+<div class="page">
   <!--
 		<span class="banner">
 			<picture>
@@ -41,19 +41,15 @@
 		</span>
       -->
 	<ChoiceSelector/>
-</section>
+</div>
 
 <style>
-	section {
+	.page {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
-		flex: 0.5;
-	}
-
-	h1 {
-		width: 100%;
+		justify-content: space-between;
+		height: 95vh;
 	}
 
 	.banner {

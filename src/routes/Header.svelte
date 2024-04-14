@@ -9,10 +9,10 @@
 	</div>
 
 	<nav>
-				<a href="https://chedieck.com">Chedieck</a>
 	</nav>
 
 	<div class="corner">
+		<a href="https://chedieck.com">chedieck.com</a>
 		<a href="https://github.com/chedieck/">
 			<img src={github} alt="GitHub" />
 		</a>
@@ -21,21 +21,19 @@
 
 <style>
 	header {
+		height: 3vh;
 		display: flex;
 		justify-content: space-between;
 	}
 
 	.corner {
-		width: 3em;
+		width: 18em;
 		height: 3em;
+		display: flex;
 	}
 
 	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		width: 100%;
-		height: 100%;
 	}
 
 	.corner img {
@@ -50,7 +48,7 @@
 		--background: rgba(255, 255, 255, 0.7);
 	}
 
-	nav a {
+	a {
 		display: flex;
 		height: 100%;
 		align-items: center;

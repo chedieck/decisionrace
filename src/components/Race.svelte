@@ -57,28 +57,41 @@
 </script>
 
 <style>
-  .track {
-    display: flex;
-    padding: 12px;
-    margin-bottom: 8px;
-    border-radius: 10px;
+  .item-container {
+    padding: 5px;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
     position: relative;
-    min-height: 1em;
-    font-size: 48px;
+  }
+
+  .track {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    padding-left: 20px;
+    border-radius: 10px;
+    font-size: 36px;
   }
 
   .option-title {
+    width: 100%;
     display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
     justify-content: space-between;
     height: 100%;
-    width: 100%;
     transition: width 0.5s ease;
     text-align: center;
-    margin-bottom: 30px;
   }
 
   .name {
-    background-color: var(--color-theme-2);
     font-size: 24px;
     align-content: center;
   }
@@ -90,30 +103,29 @@
   }
   .horse {
     z-index: 100;
+    transform: translateX(150%); /* Move horse outside the progress bar when it reaches 100% */
   }
 
   .horse-won {
-    transform: translateX(100%); /* Move horse outside the progress bar when it reaches 100% */
+    transform: translateX(200%); /* Move horse outside the progress bar when it reaches 100% */
   }
 
   .finish-line {
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
     padding-right: 30px;
-    border-left: 2px solid #000;
   }
   .title {
     width: 100%;
-    min-height: 3em;
     min-width: 100%;
   }
 
   .score {
-    font-size: 48px;
+    font-size: 24px;
     font-weight: bold;
-  }
-
-  .item-container {
-    padding: 20px;
   }
 
   .item-container:nth-child(odd) {
@@ -122,13 +134,20 @@
 
   .progress-container {
     width: 90%;
-    position: relative;
     display: flex;
     overflow: visible;
   }
 
   .race-container {
     width: 100%;
+    max-height: 90vh;
+  }
+
+  .items-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 84vh;
   }
 
   .item-container:nth-child(even) {
@@ -138,16 +157,16 @@
 
 <div class="race-container">
   <h1 class="title">{titleMessage}</h1>
-  <div>
+  <div class="items-container">
     {#each options as { id, name, votes }}
-      <div class="item-container">
+      <div style='height: {Math.trunc(100/options.length)}%;' class="item-container">
         <div class="option-title">
           <div class="score">{votes.toString().padStart(2, '0')}/{VOTES_TO_WIN}</div>
 
           <div class="name">{name}</div>
           <div></div>
         </div>
-        <div class="track" style="width: 100%;">
+        <div class="track">
           <div class="progress-container">
             <div class="progress-bar" style={`width: ${(votes / VOTES_TO_WIN) * 100}%`}>
             </div>

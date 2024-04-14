@@ -1,8 +1,7 @@
 @import '@fontsource/fira-mono';
 
 :root {
-	--font-body: Roboto, Ubuntu, Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen,
-		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	--font-body: 'Roboto', sans-serif;
 	--font-mono: 'Fira Mono', monospace;
 	--color-bg-1: #000011;
 	--color-bg-2: #001100;
@@ -14,6 +13,9 @@
 	font-family: var(--font-body);
 	color: var(--color-text);
 }
+
+/* Ubuntu, Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen,
+		Cantarell, 'Open Sans', 'Helvetica Neue',  */
 
 body {
 	min-height: 100vh;
@@ -50,6 +52,10 @@ h1 {
 
 h2 {
 	font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-stretch: expanded; /* Or expanded */
 }
 
 pre {
