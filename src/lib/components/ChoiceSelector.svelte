@@ -4,6 +4,7 @@
   import RaceConfig from './RaceConfig.svelte'
   import { browser } from '$app/environment';
 	import type { RaceConfigType } from '$lib/types';
+  import bigLogo  from '$lib/images/big-logo.png';
 
   let inputText: string = '';
   let items: string[] = [];
@@ -104,7 +105,7 @@
 
   button {
     cursor: pointer;
-    height: 7em;
+    height: 3em;
     width: 100%;
     font-size: 20px;
     margin-bottom: 10vh;
@@ -114,6 +115,7 @@
 
   .start-race {
     width: 50%;
+    margin-top: 0.5em;
   }
 
   .hidden {
@@ -138,7 +140,10 @@
 </style>
 
 {#if !raceStarted}
-<h1>DecisionRace</h1>
+  <div class="row center">
+    <img src={bigLogo} alt='Logo'>
+    <h1>DecisionRace</h1>
+  </div>
 <h2>To start, add items to the decision array:</h2>
 <div class="container">
 
