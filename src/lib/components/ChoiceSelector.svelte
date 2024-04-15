@@ -1,13 +1,17 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Race from './Race.svelte'
+  import RaceConfig from './RaceConfig.svelte'
   import { browser } from '$app/environment';
+	import type { RaceConfigType } from '$lib/types';
+
   let inputText: string = '';
   let items: string[] = [];
 
+  let raceConfig: RaceConfigType
+
   let addDisabled = false
   let tooManyItems = false
-  let tooManyChars = false
 
   export let raceStarted: boolean
 
@@ -73,11 +77,9 @@
     overflow: hidden;
     display: flex;
     align-items: flex-top;
-    max-width: 100vh;
+    max-width: 80vw;
+    height: 60vh;
     justify-content: space-around;
-  }
-
-  .container:nth-child(odd) {
   }
 
   .container:nth-child(odd) {
@@ -89,8 +91,7 @@
     padding: 24px;
     flex-direction: column;
     align-items: center;
-    width: 40%;
-    min-width: 40%;
+    width: 25%;
     height: 100%;
     background-color: var(--color-bg-2);
   }
@@ -137,10 +138,13 @@
 </style>
 
 {#if !raceStarted}
-<div class="top-section">
-<h1>To start, add items to the decision array:</h1>
+<h1>Decision Race</h1>
+<h2>To start, add items to the decision array:</h2>
 <div class="container">
 
+  <div class="inner-container">
+    <RaceConfig bind:raceConfig/>
+  </div>
   <div class="inner-container">
     <textarea on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} rows="3" placeholder={placeholder}></textarea>
     <button on:click={addItem} disabled={addDisabled}>Add</button>
@@ -162,11 +166,10 @@
       </div>
   </div>
 </div>
-</div>
 <button on:click={() => raceStarted = true} class="start-race" class:hidden={items.length < 2}>
   Start Race
 </button>
 {/if}
 {#if raceStarted}
-  <Race optionNames={items} bind:raceStarted/>
+  <Race optionNames={items} bind:raceStarted bind:raceConfig/>
 {/if}

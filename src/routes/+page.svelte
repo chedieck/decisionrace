@@ -32,13 +32,6 @@
 </svelte:head>
 
 <div class="page">
-  <!--
-		<span class="banner">
-			<picture>
-				<img src={banner} alt="Welcome" />
-			</picture>
-		</span>
-      -->
 	<ChoiceSelector raceStarted={false}/>
 </div>
 
@@ -48,6 +41,5 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		height: 95vh;
 	}
 </style>

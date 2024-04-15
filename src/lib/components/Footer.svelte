@@ -4,46 +4,44 @@
   import github from '$lib/images/github.svg';
 </script>
 
-<header>
+<div class="footer">
 
-    <div class="corner">
-      <a href="https://github.com/chedieck/">
-        <img src={github} alt="GitHub" />
+    <div class="occupy-space corner">
+      <a href="https://github.com/chedieck/choicerace">
+        &lt;/&gt;
       </a>
     </div>
     <div class="center">
       <a href="https://chedieck.com">chedieck.com</a>
     </div>
-    <div class="occupy-space">
-      <a href="https://github.com/chedieck/">
-        <img src={github} alt="GitHub" />
+    <div class="corner">
+      <a href="https://github.com/chedieck/choicerace">
+        &lt;/&gt;
       </a>
     </div>
 
-</header>
+</div>
 
 <style>
-	header {
+	.footer {
 		height: 3vh;
 		display: flex;
+    flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
     padding-top: 3px;
     padding-bottom: 3px;
-    background-color: var(--color-theme-2);
+    background-color: var(--color-bg-3);
 	}
 
-	.corner, .center {
+	.center {
 		height: 100%;
 		display: flex;
 	}
-
-
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
-	}
+  .corner {
+		height: 100%;
+		display: flex;
+  }
 
 	a {
 		display: flex;
