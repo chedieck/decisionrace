@@ -7,7 +7,7 @@
 <div class="footer">
 
     <div class="occupy-space corner">
-      <a href="https://github.com/chedieck/choicerace">
+      <a href="https://github.com/chedieck/decisionrace">
         &lt;/&gt;
       </a>
     </div>
@@ -15,7 +15,7 @@
       <a href="https://chedieck.com">chedieck.com</a>
     </div>
     <div class="corner">
-      <a href="https://github.com/chedieck/choicerace">
+      <a href="https://github.com/chedieck/decisionrace">
         &lt;/&gt;
       </a>
     </div>
