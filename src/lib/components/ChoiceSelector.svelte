@@ -138,7 +138,7 @@
 </style>
 
 {#if !raceStarted}
-<h1>Decision Race</h1>
+<h1>DecisionRace</h1>
 <h2>To start, add items to the decision array:</h2>
 <div class="container">
 

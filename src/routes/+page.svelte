@@ -15,7 +15,7 @@
 
 <svelte:head>
 	<!-- Primary Meta Tags -->
-	<title>Decision Race</title>
+	<title>DecisionRace</title>
 	<meta charset="UTF-8"/>
 	<meta name="title" content={title}/>
 	<meta name="description" content={description}/>
