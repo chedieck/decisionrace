@@ -1,0 +1,69 @@
+<script>
+	import { page } from '$app/stores';
+  import logo from '$lib/images/svelte-logo.svg';
+  import github from '$lib/images/github.svg';
+</script>
+
+<header>
+
+    <div class="corner">
+      <a href="https://github.com/chedieck/">
+        <img src={github} alt="GitHub" />
+      </a>
+    </div>
+    <div class="center">
+      <a href="https://chedieck.com">chedieck.com</a>
+    </div>
+    <div class="occupy-space">
+      <a href="https://github.com/chedieck/">
+        <img src={github} alt="GitHub" />
+      </a>
+    </div>
+
+</header>
+
+<style>
+	header {
+		height: 3vh;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: var(--color-theme-2);
+	}
+
+	.corner, .center {
+		height: 100%;
+		display: flex;
+	}
+
+
+	.corner img {
+		width: 2em;
+		height: 2em;
+		object-fit: contain;
+	}
+
+	a {
+		display: flex;
+		height: 100%;
+		align-items: center;
+		padding: 0 0.5rem;
+		color: var(--color-text);
+		font-weight: 700;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		text-decoration: none;
+		transition: color 0.2s linear;
+	}
+
+  .occupy-space {
+    visibility: hidden;
+	}
+
+	a:hover {
+		color: var(--color-link-text);
+	}
+</style>

@@ -24,7 +24,16 @@
       inputText = ''; // Clear the input field
     }
   };
+  const resetList = () => {
+    items = []
+  }
 
+  const removeLast = () => {
+    if (items.length < 1) {
+      return
+    }
+    items = items.slice(0, items.length -1)
+  }
   // Handle the Enter key to add the item
   const handleKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Enter' && !event.shiftKey) {
@@ -77,7 +86,7 @@
 
   .inner-container {
     display: flex;
-    padding: 32px;
+    padding: 24px;
     flex-direction: column;
     align-items: center;
     width: 40%;
@@ -103,7 +112,6 @@
   }
 
   .start-race {
-    text-transform: uppercase;
     width: 50%;
   }
 
@@ -113,6 +121,17 @@
 
   .items-list {
     margin-top: 1rem;
+  }
+
+  .remove-button-container {
+    width: 100%;
+  }
+
+  .remove-button {
+    height: 3em;
+    font-size: 14px;
+    width: 50%;
+    margin: 0px;
   }
 
 </style>
@@ -136,6 +155,11 @@
           <li>{item}</li>
         {/each}
       </ul>
+      <div class="row remove-button-container">
+        <button class="remove-button" on:click={removeLast}>Remove last item</button>
+        <div style:visibility='hidden'>0</div>
+        <button class="remove-button" on:click={resetList}>Reset list</button>
+      </div>
   </div>
 </div>
 </div>
@@ -144,5 +168,5 @@
 </button>
 {/if}
 {#if raceStarted}
-  <Race optionNames={items}/>
+  <Race optionNames={items} bind:raceStarted/>
 {/if}

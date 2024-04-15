@@ -3,11 +3,13 @@
 :root {
 	--font-body: 'Roboto', sans-serif;
 	--font-mono: 'Fira Mono', monospace;
-	--color-bg-1: #000011;
-	--color-bg-2: #001100;
+	--color-bg-1: #000022;
+	--color-bg-2: #002200;
 	--color-theme-1: #1122bb;
-	--color-theme-2: #770510;
+	--color-theme-2: #772507;
 	--color-text: rgba(180, 180, 24, 0.9);
+	--color-link-text: rgba(255, 255, 0, 1);
+	--color-link-bg: rgba(24, 24, 180, 0.9);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
 	font-family: var(--font-body);
@@ -69,6 +71,22 @@ pre {
 	color: var(--color-text);
 }
 
+kbd {
+  background-color: #eee;
+  border-radius: 3px;
+  border: 1px solid #b4b4b4;
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.2),
+    0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+  color: #333;
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+
 .text-column {
 	display: flex;
 	max-width: 48rem;
@@ -82,6 +100,16 @@ input,
 button {
 	font-size: inherit;
 	font-family: inherit;
+}
+
+button {
+  border: 0;
+}
+
+button:hover {
+	color: var(--color-link-text);
+	background-color: var(--color-link-bg);
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 button:focus:not(:focus-visible) {
@@ -106,10 +134,29 @@ button:focus:not(:focus-visible) {
 	white-space: nowrap;
 }
 
+.message {
+	background-color: rgba(0,255,255,0.8);
+  color: black;
+  padding: 6px;
+	border-bottom: solid 4px rgba(0,0,0,0.7);
+	border-right: solid 4px rgba(0,0,0,0.7);
+}
+
 .error {
 	color: red;
-	background-color: rgba(255,255,255,0.7);
+	background-color: rgba(0,255,255,0.8);
 	border-bottom: solid 4px rgba(0,0,0,0.7);
+	border-right: solid 4px rgba(0,0,0,0.7);
 	padding: 5px;
 }
 
+.center {
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}

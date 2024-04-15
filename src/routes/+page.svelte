@@ -1,6 +1,5 @@
 <script>
-  import ChoiceSelector from '../components/ChoiceSelector.svelte'
-	import banner from '$lib/images/banner.png';
+  import ChoiceSelector from '$lib/components/ChoiceSelector.svelte'
 </script>
 
 <svelte:head>
@@ -40,7 +39,7 @@
 			</picture>
 		</span>
       -->
-	<ChoiceSelector/>
+	<ChoiceSelector raceStarted={false}/>
 </div>
 
 <style>
@@ -50,21 +49,5 @@
 		align-items: center;
 		justify-content: space-between;
 		height: 95vh;
-	}
-
-	.banner {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.banner img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
 	}
 </style>
