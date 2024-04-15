@@ -1,31 +1,44 @@
 <script>
   import ChoiceSelector from '$lib/components/ChoiceSelector.svelte'
+
+
+  const author = "Estevão Chedieck Lobo"
+
+  const url = "https://race.chedieck.com"
+
+  const title = "DecisionRace — Turn random decisions into a thrilling race."
+
+  const description = "Settle decisions between which options to pick. Whether it's choosing tonight's movie, the next book club read, where to dine, or who gets the last cookie in the pack, DecisionRace adds excitement to every choice."
+
+  const keywords = "Decision, Decision Making, Choices, Fun, Race, Entertainment, Interactive, Games, Decision Help, Choice Assistance, Random Choice, Random, Decicions, Choice, Help Choosing"
 </script>
 
 <svelte:head>
 	<!-- Primary Meta Tags -->
 	<title>Decision Race</title>
 	<meta charset="UTF-8"/>
-	<meta name="title" content="DecisionRace — Choosing made fun!"/>
-	<meta name="description" content="Decision Race, the app where choices become a thrilling race! Perfect for settling decisions, picking options, or just for fun. Whether it's choosing tonight's movie, the next book club read, where to dine, or who gets the last cookie in the pack, Decision Race adds excitement to every choice. Visit race.chedieck.com and let the race begin!"/>
+	<meta name="title" content={title}/>
+	<meta name="description" content={description}/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-	<meta name="keywords" content="Decision Making, Choices, Fun, Race, Entertainment, Interactive, Games, Decision Help, Choice Assistance"/>
-	<meta name="author" content="Estevão Chedieck Lobo"/>
+	<meta name="keywords" content={keywords}/>
+	<meta name="author" content={author}/>
 	<meta name="language" content="English"/>
-	<link rel="canonical" href="https://race.chedieck.com"/>
+	<link rel="canonical" href={url}/>
 	<!-- Social Media Tags -->
 
 	<meta property="og:type" content="website"/>
-	<meta property="og:url" content="https://race.chedieck.com"/>
-	<meta property="og:title" content="DecisionRace — Choosing made fun!"/>
-	<meta property="og:description" content="Decision Race, the app where choices become a thrilling race! Perfect for settling decisions, picking options, or just for fun. Visit race.chedieck.com and let the race begin!"/>
-	<meta property="og:image" content="https://race.chedieck.com/1200x630-facebook.png"/>
+	<meta property="og:url" content={url}/>
+	<meta property="og:title" content={title}/>
+	<meta property="og:description" content={description}/>
+  <meta property="og:image" content={`${url}/1200x630-facebook.png`}/>
+
 	<!-- Twitter Card data -->
+  <meta name="twitter:image" content={`${url}/1200x628-twitter.png`}/>
 	<meta name="twitter:card" content="summary_large_image"/>
-	<meta name="twitter:title" content="DecisionRace — Choosing made fun!"/>
-	<meta name="twitter:description" content="Decision Race, the app where choices become a thrilling race! Perfect for settling decisions, picking options, or just for fun. Visit race.chedieck.com and let the race begin!"/>
+	<meta name="twitter:title" content={title}/>
+	<meta name="twitter:description" content={description}/>
 
 
 </svelte:head>
