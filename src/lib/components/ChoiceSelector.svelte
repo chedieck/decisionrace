@@ -13,6 +13,7 @@
 
   let addDisabled = false
   let tooManyItems = false
+  let loading = true
 
   export let raceStarted: boolean
 
@@ -59,16 +60,21 @@
 
   onMount(() => {
     window.addEventListener('keydown', handleKeydown);
-
+    loading = false
     return () => {
       window.removeEventListener('keydown', handleKeydown);
     };
   });
 
+  let first10Items = []
+  let last10Items = []
+
   $: tooManyItems = items.length >= MAX_ITEMS
   $: tooManyItemsInInput = inputText.split(/\n+/).length > (MAX_ITEMS - items.length)
   $: tooManyCharsInInput = inputText.length > MAX_INPUT_CHARS
-  $: addDisabled = tooManyItems || tooManyItemsInInput || tooManyCharsInInput
+  $: addDisabled = tooManyItems || tooManyItemsInInput || tooManyCharsInInput || loading
+  $: first10Items = items.slice(0, 10)
+  $: last10Items = items.slice(10, 20)
 
 </script>
 
@@ -118,10 +124,6 @@
     margin-top: 0.5em;
   }
 
-  .hidden {
-    visibility: hidden;
-  }
-
   .items-list {
     margin-top: 1rem;
   }
@@ -137,6 +139,59 @@
     margin: 0px;
   }
 
+  @media (max-width: 768px) {
+    .container {
+      width: 100vw;
+      max-width: 100vw;
+      justify-content: start;
+      height: 60vh;
+    }
+
+    button {
+      height: 2em;
+      width: 100%;
+      margin: 0;
+    }
+
+    .inner-container {
+      display: flex;
+      padding: 0;
+      padding-top: 4px;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: min-content;
+      background-color: var(--color-bg-2);
+    }
+
+    li {
+      width: 100%;
+    }
+
+    .options {
+      height: max-content;
+    }
+
+    .error {
+      margin: 0;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    button.only-on-media {
+      width: 27%;
+    }
+
+    .items-list {
+      width: 50%;
+    }
+
+    .items-list.full-width {
+      width: 100%;
+    }
+  }
 </style>
 
 {#if !raceStarted}
@@ -145,7 +200,7 @@
     <h1>DecisionRace</h1>
   </div>
 <h2>To start, add items to the decision array:</h2>
-<div class="container">
+<div class="container mobile-undo-row">
 
   <div class="inner-container">
     <RaceConfig bind:raceConfig/>
@@ -153,27 +208,46 @@
   <div class="inner-container">
     <textarea on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} rows="3" placeholder={placeholder}></textarea>
     <button on:click={addItem} disabled={addDisabled}>Add</button>
+    <div class="row remove-button-container not-on-media" class:hidden={items.length < 1}>
+      <button class="remove-button" on:click={removeLast}>Remove last item</button>
+      <div style:visibility='hidden'>0</div>
+      <button class="remove-button" on:click={resetList}>Reset list</button>
+    </div>
     {#if tooManyItems || tooManyItemsInInput }
-      <p class="error">You cannot add more than 20 items.</p>
+      <p class="error not-on-media">You cannot add more than 20 items.</p>
     {/if}
   </div>
-  <div class="inner-container" class:hidden={items.length < 1}>
+  <div class="inner-container options" class:hidden={items.length < 1}>
+    <div class="row justify-between full-width">
+      <button class="remove-button only-on-media" on:click={removeLast}>Remove last item</button>
       <h3>Available Options</h3>
-      <ul class="items-list">
+      <button class="remove-button only-on-media" on:click={resetList}>Reset list</button>
+    </div>
+    <div class="row full-width">
+      <ol class="items-list not-on-media">
         {#each items as item, index (index)}
           <li>{item}</li>
         {/each}
-      </ul>
-      <div class="row remove-button-container">
-        <button class="remove-button" on:click={removeLast}>Remove last item</button>
-        <div style:visibility='hidden'>0</div>
-        <button class="remove-button" on:click={resetList}>Reset list</button>
-      </div>
+      </ol>
+      <ol class="items-list only-on-media" class:full-width={items.length < 11}>
+        {#each first10Items as item, index (index)}
+          <li>{item}</li>
+        {/each}
+      </ol>
+      <ol class="items-list only-on-media" class:undisplayable={items.length < 11}>
+        {#each last10Items as item, index (index)}
+          <li>{item}</li>
+        {/each}
+      </ol>
+    </div>
   </div>
 </div>
 <button on:click={() => raceStarted = true} class="start-race" class:hidden={items.length < 2}>
   Start Race
 </button>
+{#if tooManyItems || tooManyItemsInInput }
+  <p class="error only-on-media">You cannot add more than 20 items.</p>
+{/if}
 {/if}
 {#if raceStarted}
   <Race optionNames={items} bind:raceStarted bind:raceConfig/>

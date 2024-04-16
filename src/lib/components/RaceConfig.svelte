@@ -52,6 +52,32 @@
     max-width: 400px; /* Maximum width of the form */
     margin: auto; /* Center the form horizontally on the page */
   }
+  @media (max-width: 768px) {
+    input {
+      width: 34%;
+    }
+    label {
+      width: 66%;
+    }
+    .form-container {
+      flex-direction: row;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    .form-label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 0px;
+    }
+    .form-label:nth-child(even) {
+      margin-left: 10px;
+    }
+    .form-label:nth-child(odd) {
+      margin-right: 10px;
+    }
+  }
 </style>
 <div>
   <form class="form-container">

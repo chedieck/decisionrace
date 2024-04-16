@@ -124,9 +124,9 @@
     top: 0;
     left: 0;
     align-items: center;
-    padding-left: 20px;
     border-radius: 10px;
     font-size: 36px;
+    justify-content: start;
   }
 
   .option-title {
@@ -152,13 +152,14 @@
     transition: width 0.5s ease;
     text-align: center;
   }
+
   .horse {
     z-index: 100;
-    transform: translateX(150%); /* Move horse outside the progress bar when it reaches 100% */
   }
 
+  /* WIP ADD EASE */
   .horse-won {
-    transform: translateX(200%); /* Move horse outside the progress bar when it reaches 100% */
+    transform: translateX(100%);
   }
 
   .finish-line {
@@ -167,7 +168,7 @@
     flex-direction: row;
     text-align: center;
     align-items: center;
-    padding-right: 30px;
+    width: 10%;
   }
 
   .title-container {
@@ -188,7 +189,7 @@
   .score {
     font-size: 24px;
     font-weight: bold;
-    padding-left: 12px;
+    width: 5%;
   }
 
   .item-container:nth-child(odd) {
@@ -196,9 +197,9 @@
   }
 
   .progress-container {
-    width: 90%;
     display: flex;
-    overflow: visible;
+    overflow:visible;
+    width: 100%;
   }
 
   .race-container {
@@ -241,19 +242,51 @@
     display: none;
   }
 
+  /* PC only */
   @media (min-width: 769px) {
     .next {
-      display: none; /* Hide the button on PC */
+      display: none;
     }
     .tooltip-container {
-      display: block; /* Show the tooltip on PC */
+      display: block;
     }
   }
 
-  /* Media query for mobile devices (screens up to 768px wide) */
+  /* MOBILE only */
   @media (max-width: 768px) {
     .tooltip-container {
-      display: none; /* Hide the tooltip on mobile */
+      display: none;
+    }
+    .bottom-button-container {
+      height: 5vh;
+    }
+    .title {
+      font-size: 1.5em;
+    }
+    .title-container {
+      display: flex;
+      height: 10vh;
+    }
+    button {
+      width: 50%;
+      height: 100%;
+      font-size: 16px;
+      border-radius: 0;
+    }
+
+    .top-button {
+      height: 100%;
+      width: 30%;
+    }
+
+    .name {
+      font-size: 18px;
+      align-content: center;
+    }
+
+    .track {
+      font-size: 36px;
+      padding-left: 0px;
     }
   }
 
@@ -280,7 +313,8 @@
         </div>
         <div class="track">
           <div class="progress-container">
-            <div class="progress-bar" style={`width: ${(votes / raceConfig.votesToWin) * 100}%`}>
+            <div class="score hidden">{votes.toString().padStart(2, '0')}/{raceConfig.votesToWin.toString().padStart(2, '0')}</div>
+            <div class="progress-bar" style={`width: ${(votes / raceConfig.votesToWin) * 95}%`}>
             </div>
             <div class={`horse ${votes === raceConfig.votesToWin ? 'horse-won' : ''}`}>🐎</div>
           </div>

@@ -123,6 +123,14 @@ button:focus:not(:focus-visible) {
 	}
 }
 
+.undisplayable {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
 .visually-hidden {
 	border: 0;
 	clip: rect(0 0 0 0);
@@ -160,4 +168,36 @@ button:focus:not(:focus-visible) {
 .row {
   display: flex;
   flex-direction: row;
+}
+
+.mobile-undo-row {
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.computer-undo-row {
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.not-on-media {
+  @media (max-width: 768px) {
+    display: none
+  }
+}
+.only-on-media {
+  display: none;
+  @media (max-width: 768px) {
+    display: block
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
