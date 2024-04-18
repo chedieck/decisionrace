@@ -83,7 +83,7 @@
   <form class="form-container">
     <div class="form-label">
       <label for="votesToWin">
-        Votes to Win (1-9999):
+        Votes to Win:
       </label>
       <input
         id="votesToWin"
