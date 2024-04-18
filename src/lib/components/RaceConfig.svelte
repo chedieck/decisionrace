@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { RaceConfigType } from '$lib/types'
   export let raceConfig: RaceConfigType = {
-    votesToWin: 20,
+    votesToWin: 5,
     autoStep: 0
   };
 

@@ -199,7 +199,7 @@
     <img src={bigLogo} alt='Logo'>
     <h1>DecisionRace</h1>
   </div>
-<h2>To start, add items to the decision array:</h2>
+<h2>To start, add choice options to the text area below:</h2>
 <div class="container mobile-undo-row">
 
   <div class="inner-container">
