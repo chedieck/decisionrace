@@ -155,6 +155,7 @@
 
   .horse {
     z-index: 100;
+    transition: transform 0.5s ease;
   }
 
   /* WIP ADD EASE */
