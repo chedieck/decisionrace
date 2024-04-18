@@ -9,7 +9,7 @@
 	--color-theme-1: #1122bb;
 	--color-theme-2: #772507;
 	--color-text: rgba(180, 180, 24, 0.9);
-	--color-link-text: rgba(255, 255, 0, 1);
+	--color-link-text: rgba(225, 205, 0, 1);
 	--color-link-bg: rgba(24, 24, 180, 0.9);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
@@ -98,19 +98,22 @@ kbd {
 }
 
 input,
-button {
+button,
+textarea{
 	font-size: inherit;
 	font-family: inherit;
+	border-radius: 4px;
+	border-bottom: solid 4px rgba(0,0,0,0.7);
+	border-right: solid 4px rgba(0,0,0,0.7);
 }
 
 button {
-  border: 0;
 }
 
 button:hover {
 	color: var(--color-link-text);
 	background-color: var(--color-link-bg);
-  transition: color 0.2s ease, background-color 0.2s ease;
+	transition: color 0.2s ease-out, background-color 0.2s ease-out;
 }
 
 button:focus:not(:focus-visible) {
@@ -158,6 +161,7 @@ button:focus:not(:focus-visible) {
 	padding: 6px;
 	border-bottom: solid 4px rgba(0,0,0,0.7);
 	border-right: solid 4px rgba(0,0,0,0.7);
+	border-radius: 4px;
 }
 
 .error {

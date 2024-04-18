@@ -105,7 +105,6 @@
     cursor: pointer;
     width: 20%;
     font-size: 16px;
-    border-radius: 0;
   }
 
   .item-container {
@@ -275,7 +274,6 @@
       width: 50%;
       height: 100%;
       font-size: 16px;
-      border-radius: 0;
     }
 
     .top-button {
@@ -301,7 +299,7 @@
     <button class="top-button" on:click={goBack}>
       Go back
     </button>
-    <span class="title">{titleMessage}</span>
+    <h2 class="title">{titleMessage}</h2>
     <button class="top-button" on:click={restart}>
       Restart
     </button>

@@ -67,8 +67,8 @@
     };
   });
 
-  let first10Items = []
-  let last10Items = []
+  let first10Items: string[] = []
+  let last10Items: string[] = []
 
   $: tooManyItems = items.length >= MAX_ITEMS
   $: tooManyItemsInInput = inputText.split(/\n+/).length > (MAX_ITEMS - items.length)
@@ -104,7 +104,7 @@
     background-color: var(--color-bg-2);
   }
 
-  textarea {
+  input {
     line-height: 1.5;
     width: 100%;
     font-size: 1rem;
@@ -117,7 +117,6 @@
     font-size: 20px;
     margin-bottom: 10vh;
     margin: 2em;
-    border-radius: 0;
   }
 
   .start-race {
@@ -131,6 +130,7 @@
 
   .remove-button-container {
     width: 100%;
+    padding-top: 10px;
   }
 
   .remove-button {
@@ -153,11 +153,10 @@
       height: 65vh;
     }
 
-    textarea {
+    input {
       line-height: 1;
       width: 100%;
       font-size: 1rem;
-      border-radius: 3px;
     }
 
     button {
@@ -225,7 +224,7 @@
     <RaceConfig bind:raceConfig/>
   </div>
   <div class="inner-container">
-    <textarea on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} rows="3" placeholder={placeholder}></textarea>
+    <input on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} placeholder={placeholder}>
     <div class="row remove-button-container not-on-media" class:hidden={items.length < 1}>
       <button class="remove-button" on:click={removeLast}>Remove last item</button>
       <div style:visibility='hidden'>0</div>
