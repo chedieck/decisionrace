@@ -123,12 +123,21 @@ button:focus:not(:focus-visible) {
 	}
 }
 
+@media (max-width: 720px) {
+	button:hover {
+		color: var(--color-link-text);
+		background-color: var(--color-link-bg);
+		transition: unset
+	}
+}
+
+
 .undisplayable {
-  display: none;
+	display: none;
 }
 
 .hidden {
-  visibility: hidden;
+	visibility: hidden;
 }
 
 .visually-hidden {
@@ -145,8 +154,8 @@ button:focus:not(:focus-visible) {
 
 .message {
 	background-color: rgba(0,255,255,0.8);
-  color: black;
-  padding: 6px;
+	color: black;
+	padding: 6px;
 	border-bottom: solid 4px rgba(0,0,0,0.7);
 	border-right: solid 4px rgba(0,0,0,0.7);
 }
@@ -160,46 +169,46 @@ button:focus:not(:focus-visible) {
 }
 
 .center {
-  text-align: center;
-  align-items: center;
-  align-content: center;
+	text-align: center;
+	align-items: center;
+	align-content: center;
 }
 
 .row {
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 .mobile-undo-row {
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .computer-undo-row {
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .not-on-media {
-  @media (max-width: 768px) {
-    display: none
-  }
+	@media (max-width: 768px) {
+		display: none
+	}
 }
 .only-on-media {
-  display: none;
-  @media (max-width: 768px) {
-    display: block
-  }
+	display: none;
+	@media (max-width: 768px) {
+		display: block
+	}
 }
 
 .full-width {
-  width: 100%;
+	width: 100%;
 }
 
 .justify-between {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 .absolute {

@@ -18,7 +18,7 @@
 
   export let raceStarted: boolean
 
-  const placeholder = 'Option 1\nOption 2\n...'
+  const placeholder = 'Add options here...'
   const MAX_ITEMS = 20
   const MAX_INPUT_CHARS = 1000
 
@@ -157,6 +157,7 @@
       line-height: 1;
       width: 100%;
       font-size: 1rem;
+      border-radius: 3px;
     }
 
     button {
@@ -225,7 +226,6 @@
   </div>
   <div class="inner-container">
     <textarea on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} rows="3" placeholder={placeholder}></textarea>
-    <button on:click={addItem} disabled={addDisabled}>Add</button>
     <div class="row remove-button-container not-on-media" class:hidden={items.length < 1}>
       <button class="remove-button" on:click={removeLast}>Remove last item</button>
       <div style:visibility='hidden'>0</div>
