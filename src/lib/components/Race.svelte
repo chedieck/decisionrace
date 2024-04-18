@@ -263,10 +263,12 @@
     }
     .title {
       font-size: 1.5em;
+      padding-top: 0px;
     }
     .title-container {
       display: flex;
       height: 10vh;
+      align-items: flex-start;
     }
     button {
       width: 50%;
