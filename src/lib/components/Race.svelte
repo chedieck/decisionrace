@@ -230,6 +230,7 @@
 
   .next {
     padding: 4px;
+    width: 100%;
   }
 
   .tooltip {
@@ -275,7 +276,7 @@
     }
 
     .top-button {
-      height: 100%;
+      height: 50%;
       width: 30%;
     }
 
@@ -302,6 +303,19 @@
       Restart
     </button>
   </div>
+  {#if raceConfig.autoStep > 0 && timerSeconds !== undefined}
+    <div style:visibility={finished? 'hidden' : 'display'} class="center row bottom-button-container">
+      Next step in {timerSeconds} seconds...
+    </div>
+  {:else}
+    <div style:visibility={finished? 'hidden' : 'display'} class="center row bottom-button-container">
+      <button class="next"  on:click={raceStep}>Next Step</button>
+      <div class="tooltip-container">
+        <span class="tooltip message">Press <kbd>Space</kbd> or <kbd>⏎ Enter</kbd> to take the next step.</span>
+      </div>
+    </div>
+  {/if}
+
   <div class="items-container">
     {#each options as { id, name, votes }}
       <div style='height: {Math.trunc(90/options.length)}%;' class="item-container">
@@ -323,17 +337,4 @@
       </div>
     {/each}
   </div>
-  {#if raceConfig.autoStep > 0 && timerSeconds !== undefined}
-    <div style:visibility={finished? 'hidden' : 'display'} class="center row bottom-button-container">
-      Next step in {timerSeconds} seconds...
-    </div>
-  {:else}
-    <div style:visibility={finished? 'hidden' : 'display'} class="center row bottom-button-container">
-      <button class="next"  on:click={raceStep}>Next Step</button>
-      <div class="tooltip-container">
-        <span class="tooltip message">Press <kbd>Space</kbd> or <kbd>⏎ Enter</kbd> to take the next step.</span>
-      </div>
-    </div>
-  {/if}
-
 </div>

@@ -201,3 +201,7 @@ button:focus:not(:focus-visible) {
 .justify-between {
   justify-content: space-between;
 }
+
+.absolute {
+	position: absolute;
+}

@@ -5,6 +5,7 @@
   import { browser } from '$app/environment';
 	import type { RaceConfigType } from '$lib/types';
   import bigLogo  from '$lib/images/big-logo.png';
+  import halfLogo  from '$lib/images/half-logo.png';
 
   let inputText: string = '';
   let items: string[] = [];
@@ -139,12 +140,23 @@
     margin: 0px;
   }
 
+  .logo {
+    padding-right: 12px;
+    padding-top: 12px;
+  }
+
   @media (max-width: 768px) {
     .container {
       width: 100vw;
       max-width: 100vw;
       justify-content: start;
-      height: 60vh;
+      height: 65vh;
+    }
+
+    textarea {
+      line-height: 1;
+      width: 100%;
+      font-size: 1rem;
     }
 
     button {
@@ -185,18 +197,24 @@
     }
 
     .items-list {
+      line-height: 1;
       width: 50%;
     }
 
     .items-list.full-width {
       width: 100%;
     }
+    
+    .logo-container {
+      max-height: 15vh;
+    }
   }
 </style>
 
 {#if !raceStarted}
-  <div class="row center">
-    <img src={bigLogo} alt='Logo'>
+  <div class="row center justify-between logo-container">
+    <img class="logo not-on-media" src={bigLogo} alt='Logo'>
+    <img class="logo only-on-media" src={halfLogo} alt='Logo'>
     <h1>DecisionRace</h1>
   </div>
 <h2>To start, add choice options to the text area below:</h2>
@@ -246,7 +264,7 @@
   Start Race
 </button>
 {#if tooManyItems || tooManyItemsInInput }
-  <p class="error only-on-media">You cannot add more than 20 items.</p>
+  <p class="error absolute only-on-media">You cannot add more than 20 items.</p>
 {/if}
 {/if}
 {#if raceStarted}
