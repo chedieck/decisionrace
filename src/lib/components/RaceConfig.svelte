@@ -28,120 +28,119 @@
 </script>
 <style>
   .form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 
-.form-label {
-  display: flex;
-}
+  .form-label {
+    display: flex;
+  }
 
-label {
-  padding-left: 5px;
-}
+  label {
+    padding-left: 14px;
+  }
 
-.input-container {
-  width: 20%;
-}
+  .input-container {
+    width: 5.5rem;
+  }
 
-input[type="number"] {
-  padding: 4px;
-  text-align: center;
-  font-size: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
+  input[type="number"] {
+    padding: 4px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 
-label {
-  margin-top: 5px;
-  font-size: 14px;
-  text-align: left;
-}
+  label {
+    margin-top: 5px;
+    text-align: left;
+  }
 
-.checkbox-item {
-  display: flex;
-  align-items: center;
-}
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+  }
 
-/* Toggle Switch */
-.checkbox-item input[type="checkbox"] {
-  appearance: none;
-  width: 40px;
-  height: 20px;
-  background: #ccc;
-  border-radius: 10px;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+  /* Toggle Switch */
+  .checkbox-item input[type="checkbox"] {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
 
-.checkbox-item input[type="checkbox"]:checked {
-  background: #4CAF50;
-}
+  .checkbox-item input[type="checkbox"]:checked {
+    background: #4CAF50;
+  }
 
-.checkbox-item input[type="checkbox"]::before {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background: white;
-  border-radius: 50%;
-  top: 2px;
-  left: 2px;
-  transition: transform 0.3s ease;
-}
+  .checkbox-item input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+  }
 
-.checkbox-item input[type="checkbox"]:checked::before {
-  transform: translateX(20px);
-}
+  .checkbox-item input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
+  }
 
 </style>
 <div>
-    <div class="row justify-between full-width">
-      <h3>Options</h3>
-    </div>
+  <div class="row justify-between full-width">
+    <h2>Options</h2>
+  </div>
   <form class="form-container">
     <div class:hidden={items.length < 1} class="checkbox-item">
-        <div class="input-container">
+      <div class="input-container">
         <input type="checkbox" bind:checked={raceConfig.linkToRottenTomatoes} name="link-to-rt">
       </div>
       <label  for="link-to-rt">
-        Link options to Rotten Tomatoes
+        Link options to RottenTomatoes
       </label>
     </div>
     <div class="form-label">
       <div class="input-container">
-      <input
-        id="votesToWin"
-        type="number"
-        min="1"
-        max="9999"
-        step="1"
-        bind:value={raceConfig.votesToWin}
-        on:input={event => handleInput('votesToWin', event)}
-      >
+        <input
+          id="votesToWin"
+          type="number"
+          min="1"
+          max="9999"
+          step="1"
+          bind:value={raceConfig.votesToWin}
+          on:input={event => handleInput('votesToWin', event)}
+        >
+        </div>
+        <label for="votesToWin">
+          Votes to win
+        </label>
       </div>
-      <label for="votesToWin">
-        Votes to Win:
-      </label>
-    </div>
-    <div class="form-label">
+      <div class="form-label">
         <div class="input-container">
-      <input
-        id="autoStep"
-        type="number"
-        min="0"
-        max="9999"
-        step="1"
-        bind:value={raceConfig.autoStep}
-        on:input={event => handleInput('autoStep', event)}
-      >
-      </div>
-      <label for="autoStep">
-        Automatically step every N seconds; 0 for manual step:
-      </label>
+          <input
+            id="autoStep"
+            type="number"
+            min="0"
+            max="9999"
+            step="1"
+            bind:value={raceConfig.autoStep}
+            on:input={event => handleInput('autoStep', event)}
+          >
+          </div>
+          <label for="autoStep">
+            Auto step every N seconds
+            <br>(0 for manual step)
+          </label>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
 

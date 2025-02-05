@@ -9,8 +9,10 @@
 	--color-theme-1: #5555ff;
 	--color-theme-2: #772507;
 	--color-text: rgba(180, 180, 24, 0.9);
-	--color-link-text: rgba(225, 205, 0, 1);
-	--color-link-bg: rgba(24, 24, 180, 0.9);
+	--color-link-text: rgba(85, 85, 255, 1);
+	--color-link-bg: rgba(225, 205, 0, 1);
+	--color-link-text-alt: rgba(225, 255, 255, 1);
+	--color-link-bg-alt: rgba(225, 85, 85, 1);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
 	font-family: var(--font-body);
@@ -42,7 +44,7 @@ p {
 }
 
 a {
-	color: var(--color-theme-1);
+	color: var(--color-link-text);
 	text-decoration: none;
 }
 
@@ -116,9 +118,14 @@ input::placeholder {
 }
 
 button:hover {
-	color: var(--color-link-text);
+	color: black;
 	background-color: var(--color-link-bg);
 	transition: color 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+button.negative:hover {
+	background-color: var(--color-link-bg-alt);
+	color: var(--color-link-text-alt);
 }
 
 button:focus:not(:focus-visible) {

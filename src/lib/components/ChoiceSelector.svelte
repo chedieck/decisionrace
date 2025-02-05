@@ -207,14 +207,14 @@
 </style>
 
 {#if !raceConfig.raceStarted}
-  <h2>Add candidates to the text area below:</h2>
+  <h1>Add candidates to the text area below:</h1>
   <input class="main-prompt" on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} placeholder={placeholder}>
   <div class="row remove-button-container not-on-media" class:hidden={items.length < 1}>
-    <button class="remove-button" on:click={removeLast}>Remove last item</button>
+    <button class="remove-button negative" on:click={removeLast}>Remove last item</button>
     <button on:click={() => raceConfig.raceStarted = true} class="start-race" class:hidden={items.length < 2}>
       Start Race
     </button>
-    <button class="remove-button" on:click={resetList}>Reset list</button>
+    <button class="remove-button  negative" on:click={resetList}>Reset list</button>
   </div>
   {#if tooManyItems || tooManyItemsInInput }
     <p class="error not-on-media">You cannot add more than 20 items.</p>
@@ -226,7 +226,7 @@
     </div>
     <div class="inner-container" class:hidden={items.length < 1}>
       <div class="row justify-between full-width">
-        <h3>Choice Pool</h3>
+        <h2>Choice Pool</h2>
       </div>
       <div class="row full-width">
         <ol class="items-list not-on-media">
