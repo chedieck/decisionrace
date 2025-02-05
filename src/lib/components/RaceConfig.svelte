@@ -90,12 +90,16 @@
     transition: transform 0.3s ease;
   }
 
+  .options-container {
+    padding-bottom: 2rem;
+  }
+
   .checkbox-item input[type="checkbox"]:checked::before {
     transform: translateX(20px);
   }
 
 </style>
-<div>
+<div class="options-container">
   <div class="row justify-between full-width">
     <h2>Options</h2>
   </div>

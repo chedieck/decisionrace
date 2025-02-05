@@ -86,7 +86,6 @@
     overflow: hidden;
     display: flex;
     align-items: flex-top;
-    height: 60vh;
     background-color: var(--color-bg-2);
     color: var(--color-text-2);
   }
