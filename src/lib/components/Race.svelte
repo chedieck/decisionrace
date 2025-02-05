@@ -3,7 +3,6 @@
 	import type { RaceConfigType, OptionType } from '$lib/types';
 
   export let optionNames: string[] = [];
-  export let raceStarted: boolean
   export let raceConfig: RaceConfigType
 
   function getTitle(name: string, votes: number): string {
@@ -20,7 +19,7 @@
   let options: OptionType[] = [];
 
   function goBack() {
-    raceStarted = false
+    raceConfig.raceStarted = false
   }
 
   function restart() {

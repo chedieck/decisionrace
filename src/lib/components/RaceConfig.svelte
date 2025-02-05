@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { RaceConfigType } from '$lib/types'
+  export let items: string[]
   export let raceConfig: RaceConfigType = {
     votesToWin: 10,
     autoStep: 0
@@ -26,65 +27,91 @@
 
 </script>
 <style>
-  .form-label {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px; /* Space between label-input pairs */
-  }
-
-  label {
-    font-weight: bold;
-    margin-bottom: 5px; /* Space between the label text and the input */
-  }
-
-  input {
-    width: 100%; /* Make input take full width of its container */
-    padding: 8px; /* Padding inside the input for better readability */
-    box-sizing: border-box; /* Include padding and border in the width */
-  }
-
   .form-container {
-    display: flex;
-    flex-direction: column; /* Stack the label-input pairs vertically */
-    align-items: flex-start; /* Align items to the start of the flex container */
-    padding: 20px; /* Padding around the entire form */
-    max-width: 400px; /* Maximum width of the form */
-    margin: auto; /* Center the form horizontally on the page */
-  }
-  @media (max-width: 768px) {
-    input {
-      width: 34%;
-    }
-    label {
-      width: 66%;
-    }
-    .form-container {
-      flex-direction: row;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-    }
-    .form-label {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-bottom: 0px;
-    }
-    .form-label:nth-child(even) {
-      margin-left: 10px;
-    }
-    .form-label:nth-child(odd) {
-      margin-right: 10px;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-label {
+  display: flex;
+}
+
+label {
+  padding-left: 5px;
+}
+
+.input-container {
+  width: 20%;
+}
+
+input[type="number"] {
+  padding: 4px;
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+label {
+  margin-top: 5px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Toggle Switch */
+.checkbox-item input[type="checkbox"] {
+  appearance: none;
+  width: 40px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.checkbox-item input[type="checkbox"]:checked {
+  background: #4CAF50;
+}
+
+.checkbox-item input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
+}
+
+.checkbox-item input[type="checkbox"]:checked::before {
+  transform: translateX(20px);
+}
+
 </style>
 <div>
+    <div class="row justify-between full-width">
+      <h3>Options</h3>
+    </div>
   <form class="form-container">
-    <div class="form-label">
-      <label for="votesToWin">
-        Votes to Win:
+    <div class:hidden={items.length < 1} class="checkbox-item">
+        <div class="input-container">
+        <input type="checkbox" bind:checked={raceConfig.linkToRottenTomatoes} name="link-to-rt">
+      </div>
+      <label  for="link-to-rt">
+        Link options to Rotten Tomatoes
       </label>
+    </div>
+    <div class="form-label">
+      <div class="input-container">
       <input
         id="votesToWin"
         type="number"
@@ -93,12 +120,14 @@
         step="1"
         bind:value={raceConfig.votesToWin}
         on:input={event => handleInput('votesToWin', event)}
-      />
+      >
+      </div>
+      <label for="votesToWin">
+        Votes to Win:
+      </label>
     </div>
     <div class="form-label">
-      <label for="autoStep">
-        Auto Step every N seconds<br/>(0 for manual step):
-      </label>
+        <div class="input-container">
       <input
         id="autoStep"
         type="number"
@@ -107,7 +136,11 @@
         step="1"
         bind:value={raceConfig.autoStep}
         on:input={event => handleInput('autoStep', event)}
-      />
+      >
+      </div>
+      <label for="autoStep">
+        Automatically step every N seconds; 0 for manual step:
+      </label>
     </div>
   </form>
 </div>

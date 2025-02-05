@@ -44,7 +44,7 @@
 </svelte:head>
 
 <div class="page">
-	<ChoiceSelector raceStarted={false}/>
+	<ChoiceSelector/>
 </div>
 
 <style>

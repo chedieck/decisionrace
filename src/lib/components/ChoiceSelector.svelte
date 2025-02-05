@@ -9,17 +9,14 @@
 
   let inputText: string = '';
   let items: string[] = [];
+  let raceConfig: RaceConfigType = { raceStarted: false, votesToWin: 10, autoStep: 0 }
 
-  let raceConfig: RaceConfigType
 
-  let linkToRottenTomatoes = false
   let addDisabled = false
   let tooManyItems = false
   let loading = true
 
-  export let raceStarted: boolean
-
-  const placeholder = 'Add options here...'
+  const placeholder = 'Add candidates here...'
   const MAX_ITEMS = 20
   const MAX_INPUT_CHARS = 1000
 
@@ -77,6 +74,7 @@
   $: addDisabled = tooManyItems || tooManyItemsInInput || tooManyCharsInInput || loading
   $: first10Items = items.slice(0, 10)
   $: last10Items = items.slice(10, 20)
+  $: raceConfig  = raceConfig
 
 </script>
 
@@ -86,46 +84,43 @@
     overflow: hidden;
     display: flex;
     align-items: flex-top;
-    max-width: 80vw;
     height: 60vh;
-    justify-content: space-around;
-  }
-
-  .container:nth-child(odd) {
     background-color: var(--color-bg-2);
   }
+
 
   .inner-container {
     display: flex;
     padding: 24px;
     flex-direction: column;
     align-items: center;
-    width: 25%;
+    width: 100%;
     height: 100%;
-    background-color: var(--color-bg-2);
+    height: max-content;
   }
 
-  .options-container {
-    align-items: left;
+  .smaller-container {
+    width: 50%;
   }
+
 
   .main-prompt {
-    line-height: 1.5;
-    width: 100%;
+    line-height: 3;
+    width: 90%;
+    margin: 20px;
     font-size: 1rem;
   }
 
   button {
     cursor: pointer;
     height: 3em;
-    width: 100%;
     font-size: 20px;
+    padding: 0.8em;
     margin-bottom: 10vh;
     margin: 2em;
   }
 
   .start-race {
-    width: 50%;
     margin-top: 0.5em;
   }
 
@@ -134,6 +129,9 @@
   }
 
   .remove-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     padding-top: 10px;
   }
@@ -141,8 +139,6 @@
   .remove-button {
     height: 3em;
     font-size: 14px;
-    width: 50%;
-    margin: 0px;
   }
 
   .logo {
@@ -171,9 +167,6 @@
     }
 
     .inner-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       width: 100%;
       height: min-content;
       background-color: var(--color-bg-2);
@@ -184,10 +177,6 @@
     }
     li {
       width: 100%;
-    }
-
-    .options {
-      height: max-content;
     }
 
     .error {
@@ -217,46 +206,33 @@
   }
 </style>
 
-{#if !raceStarted}
-  <div class="row center justify-between logo-container">
-    <img class="logo not-on-media" src={bigLogo} alt='Logo'>
-    <img class="logo only-on-media" src={halfLogo} alt='Logo'>
-    <h1>DecisionRace</h1>
+{#if !raceConfig.raceStarted}
+  <h2>Add candidates to the text area below:</h2>
+  <input class="main-prompt" on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} placeholder={placeholder}>
+  <div class="row remove-button-container not-on-media" class:hidden={items.length < 1}>
+    <button class="remove-button" on:click={removeLast}>Remove last item</button>
+    <button on:click={() => raceConfig.raceStarted = true} class="start-race" class:hidden={items.length < 2}>
+      Start Race
+    </button>
+    <button class="remove-button" on:click={resetList}>Reset list</button>
   </div>
-  <h2>To start, add choice options to the text area below:</h2>
-  <div class="container mobile-undo-row">
+  {#if tooManyItems || tooManyItemsInInput }
+    <p class="error not-on-media">You cannot add more than 20 items.</p>
+  {/if}
 
-    <div class="inner-container">
-      <RaceConfig bind:raceConfig/>
+  <div class="container mobile-undo-row">
+    <div class="inner-container smaller-container">
+      <RaceConfig bind:raceConfig bind:items/>
     </div>
-    <div class="inner-container">
-      <input class="main-prompt" on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} placeholder={placeholder}>
-      <div class="row remove-button-container not-on-media" class:hidden={items.length < 1}>
-        <button class="remove-button" on:click={removeLast}>Remove last item</button>
-        <div style:visibility='hidden'>0</div>
-        <button class="remove-button" on:click={resetList}>Reset list</button>
-      </div>
-      <div class="options-container">
-        <label class:hidden={items.length < 1} for="link-to-rt">
-          <input type="checkbox" bind:value={linkToRottenTomatoes} name="link-to-rt"/>
-          Link options to Rotten Tomatoes
-        </label>
-      </div>
-      {#if tooManyItems || tooManyItemsInInput }
-        <p class="error not-on-media">You cannot add more than 20 items.</p>
-      {/if}
-    </div>
-    <div class="inner-container options" class:hidden={items.length < 1}>
+    <div class="inner-container" class:hidden={items.length < 1}>
       <div class="row justify-between full-width">
-        <button class="remove-button only-on-media" on:click={removeLast}>Remove last item</button>
-        <h3>Available Options</h3>
-        <button class="remove-button only-on-media" on:click={resetList}>Reset list</button>
+        <h3>Choice Pool</h3>
       </div>
       <div class="row full-width">
         <ol class="items-list not-on-media">
           {#each items as item, index (index)}
             <li>
-              {#if linkToRottenTomatoes}
+              {#if raceConfig.linkToRottenTomatoes}
                 <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}>{item}</a>
               {:else}
                 <span>{item}</span>
@@ -267,7 +243,7 @@
         <ol class="items-list only-on-media" class:full-width={items.length < 11}>
           {#each first10Items as item, index (index)}
             <li>
-              {#if linkToRottenTomatoes}
+              {#if raceConfig.linkToRottenTomatoes}
                 <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}>{item}</a>
               {:else}
                 <span>{item}</span>
@@ -278,7 +254,7 @@
         <ol class="items-list only-on-media" class:undisplayable={items.length < 11}>
           {#each last10Items as item, index (index)}
             <li>
-              {#if linkToRottenTomatoes}
+              {#if raceConfig.linkToRottenTomatoes}
                 <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}>{item}</a>
               {:else}
                 <span>{item}</span>
@@ -289,13 +265,10 @@
       </div>
     </div>
   </div>
-  <button on:click={() => raceStarted = true} class="start-race" class:hidden={items.length < 2}>
-    Start Race
-  </button>
   {#if tooManyItems || tooManyItemsInInput }
     <p class="error absolute only-on-media">You cannot add more than 20 items.</p>
   {/if}
 {/if}
-{#if raceStarted}
-  <Race optionNames={items} bind:raceStarted bind:raceConfig/>
+{#if raceConfig.raceStarted}
+  <Race optionNames={items} bind:raceConfig/>
 {/if}
