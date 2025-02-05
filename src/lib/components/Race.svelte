@@ -193,6 +193,7 @@
 
   .item-container:nth-child(odd) {
     background-color: var(--color-bg-2);
+    color: var(--color-text-2);
   }
 
   .progress-container {

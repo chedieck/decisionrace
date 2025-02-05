@@ -80,12 +80,15 @@
 
 <style>
   .container {
-    width: 100%;
+    width: 90%;
+  border-radius: 6px;
+    margin: 20px;
     overflow: hidden;
     display: flex;
     align-items: flex-top;
     height: 60vh;
     background-color: var(--color-bg-2);
+    color: var(--color-text-2);
   }
 
 
@@ -125,7 +128,7 @@
   }
 
   .items-list {
-    margin-top: 1rem;
+    font-weight: 600;
   }
 
   .remove-button-container {
@@ -214,7 +217,7 @@
     <button on:click={() => raceConfig.raceStarted = true} class="start-race" class:hidden={items.length < 2}>
       Start Race
     </button>
-    <button class="remove-button  negative" on:click={resetList}>Reset list</button>
+    <button class="remove-button negative" on:click={resetList}>Reset list</button>
   </div>
   {#if tooManyItems || tooManyItemsInInput }
     <p class="error not-on-media">You cannot add more than 20 items.</p>
@@ -233,7 +236,7 @@
           {#each items as item, index (index)}
             <li>
               {#if raceConfig.linkToRottenTomatoes}
-                <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}>{item}</a>
+                <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}><span>{item}</span></a>
               {:else}
                 <span>{item}</span>
               {/if}
@@ -244,7 +247,7 @@
           {#each first10Items as item, index (index)}
             <li>
               {#if raceConfig.linkToRottenTomatoes}
-                <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}>{item}</a>
+                <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}><span>{item}</span></a>
               {:else}
                 <span>{item}</span>
               {/if}
@@ -255,7 +258,7 @@
           {#each last10Items as item, index (index)}
             <li>
               {#if raceConfig.linkToRottenTomatoes}
-                <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}>{item}</a>
+                <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}><span>{item}</span></a>
               {:else}
                 <span>{item}</span>
               {/if}

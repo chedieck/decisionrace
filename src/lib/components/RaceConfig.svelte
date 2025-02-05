@@ -67,7 +67,7 @@
     appearance: none;
     width: 40px;
     height: 20px;
-    background: #ccc;
+    background: #777;
     border-radius: 10px;
     position: relative;
     cursor: pointer;
@@ -75,7 +75,7 @@
   }
 
   .checkbox-item input[type="checkbox"]:checked {
-    background: #4CAF50;
+    background: var(--color-link-text);
   }
 
   .checkbox-item input[type="checkbox"]::before {
