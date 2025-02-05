@@ -218,3 +218,8 @@ button:focus:not(:focus-visible) {
 .absolute {
 	position: absolute;
 }
+
+  label {
+    display: flex;
+    align-items: center;
+  }

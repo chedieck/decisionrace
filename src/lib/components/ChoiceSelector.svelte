@@ -12,6 +12,7 @@
 
   let raceConfig: RaceConfigType
 
+  let linkToRottenTomatoes = false
   let addDisabled = false
   let tooManyItems = false
   let loading = true
@@ -104,7 +105,11 @@
     background-color: var(--color-bg-2);
   }
 
-  input {
+  .options-container {
+    align-items: left;
+  }
+
+  .main-prompt {
     line-height: 1.5;
     width: 100%;
     font-size: 1rem;
@@ -153,7 +158,7 @@
       height: 65vh;
     }
 
-    input {
+    .main-prompt {
       line-height: 1;
       width: 100%;
       font-size: 1rem;
@@ -167,8 +172,6 @@
 
     .inner-container {
       display: flex;
-      padding: 0;
-      padding-top: 4px;
       flex-direction: column;
       align-items: center;
       width: 100%;
@@ -176,6 +179,9 @@
       background-color: var(--color-bg-2);
     }
 
+    .inner-container > div {
+      padding-top: 12px;
+    }
     li {
       width: 100%;
     }
@@ -224,11 +230,17 @@
     <RaceConfig bind:raceConfig/>
   </div>
   <div class="inner-container">
-    <input on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} placeholder={placeholder}>
+    <input class="main-prompt" on:input={handleInput} disabled={!browser || (addDisabled && inputText === '')} bind:value={inputText} placeholder={placeholder}>
     <div class="row remove-button-container not-on-media" class:hidden={items.length < 1}>
       <button class="remove-button" on:click={removeLast}>Remove last item</button>
       <div style:visibility='hidden'>0</div>
       <button class="remove-button" on:click={resetList}>Reset list</button>
+    </div>
+    <div class="options-container">
+      <label class:hidden={items.length < 1} for="link-to-rt">
+        <input type="checkbox" bind:value={linkToRottenTomatoes} name="link-to-rt"/>
+        Link options to Rotten Tomatoes
+      </label>
     </div>
     {#if tooManyItems || tooManyItemsInInput }
       <p class="error not-on-media">You cannot add more than 20 items.</p>
@@ -243,17 +255,35 @@
     <div class="row full-width">
       <ol class="items-list not-on-media">
         {#each items as item, index (index)}
-          <li>{item}</li>
+          <li>
+            {#if linkToRottenTomatoes}
+            <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}>{item}</a>
+            {:else}
+              <span>{item}</span>
+            {/if}
+          </li>
         {/each}
       </ol>
       <ol class="items-list only-on-media" class:full-width={items.length < 11}>
         {#each first10Items as item, index (index)}
-          <li>{item}</li>
+          <li>
+            {#if linkToRottenTomatoes}
+            <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}>{item}</a>
+            {:else}
+              <span>{item}</span>
+            {/if}
+          </li>
         {/each}
       </ol>
       <ol class="items-list only-on-media" class:undisplayable={items.length < 11}>
         {#each last10Items as item, index (index)}
-          <li>{item}</li>
+          <li>
+            {#if linkToRottenTomatoes}
+            <a href=https://www.rottentomatoes.com/m/{item.replace(' ', '_').toLowerCase()}>{item}</a>
+            {:else}
+              <span>{item}</span>
+            {/if}
+          </li>
         {/each}
       </ol>
     </div>
