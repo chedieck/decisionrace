@@ -154,6 +154,12 @@
   .horse {
     z-index: 100;
     transition: transform 0.5s ease;
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+    -o-transform:rotateY(180deg);
+    -ms-transform:rotateY(180deg);
+    unicode-bidi:bidi-override;
+    direction:rtl;
   }
 
   /* WIP ADD EASE */
